@@ -1,16 +1,28 @@
 import dotenv from 'dotenv'
 import { env, getJsonFromFIle } from './env/parseEnv'
-import { GlobalConfig, HostsConfig,PagesConfig } from './env/global';
+import { GlobalConfig, HostsConfig,PagesConfig, PageElementMappings } from './env/global';
+import * as fs from "fs";
 
 dotenv.config({path: env('COMMON_CONFIG_FILE')})
 
 const hostsConfig: HostsConfig = getJsonFromFIle(env('HOSTS_URL_PATH'))
 const pagesConfig: PagesConfig = getJsonFromFIle(env('PAGES_URL_PATH'))
-console.log("index.ts ::: hostsConfig=", hostsConfig)
 
-const worldParameters:GlobalConfig = {
+const mappingfiles = fs.readdirSync(`${process.cwd()}${env('PAGE_ELEMENTS_PATH')}`)
+const pageElementMappings: PageElementMappings = mappingfiles.reduce(
+    (pageElementConfigAcc, file) => {
+        const key = file.replace('.json','')
+        const elementMappings = getJsonFromFIle(`${env('PAGE_ELEMENTS_PATH')}${file}`);
+        return { ...pageElementConfigAcc, [key]: elementMappings}
+    },
+    {}
+)
+
+
+const worldParameters: GlobalConfig = {
     hostsConfig,
     pagesConfig,
+    pageElementMappings,
 }
 
 const common = `./src/features/**/*.feature \

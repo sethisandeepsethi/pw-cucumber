@@ -8,10 +8,13 @@ Given(
         const {
             screen: {page},
             globalConfig,
+            globalVariables,
         } = this;
         
         console.log(`I am on the ${pageId} page`);
-        //await page.goto('http://localhost:3000');
+
+        globalVariables.currentScreen = pageId;
+        
         await navigateToPage(page, pageId, globalConfig)
     }
 )
