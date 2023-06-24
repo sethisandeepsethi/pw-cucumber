@@ -2,16 +2,25 @@ import { Then } from '@cucumber/cucumber'
 import { expect } from '@playwright/test'
 import { ElementKey } from '../../env/global';
 import { getElementLocator } from '../../support/web-element-helper'
+import { ScenarioWorld } from '../setup/world';
 
 Then(
     /^the "([^"]*)" should contains text "(.*)"$/,
-    async function (elementKey: string, expectedText: string) {
+    async function (this: ScenarioWorld, elementKey: ElementKey, expectedText: string) {
         const {
             screen: {page},
+            globalVariables,
+            globalConfig,
         } = this;
 
         console.log(`the ${elementKey} should contains text ${expectedText}`);
-        const content = await page.textContent("[data-id='contacts']");
+
+        const elementIdentifier = getElementLocator(elementKey, globalVariables, globalConfig);
+        console.log('elementIdentifier: ', elementIdentifier)
+
+        const content = await page.textContent(elementIdentifier);
+        console.log('content: ', content)
+
         expect(content).toBe(expectedText)
 
     }
@@ -19,7 +28,7 @@ Then(
 
 Then(
     /^the "([^"]*)" should be displayed$/,
-    async function (elementKey: ElementKey){
+    async function (this: ScenarioWorld, elementKey: ElementKey){
         const {
             screen: {page},
             globalVariables,
