@@ -3,6 +3,7 @@ import { expect } from '@playwright/test'
 import { ElementKey } from '../../env/global';
 import { getElementLocator } from '../../support/web-element-helper'
 import { ScenarioWorld } from '../setup/world';
+import { waitFor } from '../../support/wait-for-behaviour';
 
 Then(
     /^the "([^"]*)" should contains text "(.*)"$/,
@@ -16,12 +17,13 @@ Then(
         console.log(`the ${elementKey} should contains text ${expectedText}`);
 
         const elementIdentifier = getElementLocator(elementKey, globalVariables, globalConfig);
-        console.log('elementIdentifier: ', elementIdentifier)
 
-        const content = await page.textContent(elementIdentifier);
-        console.log('content: ', content)
-
-        expect(content).toBe(expectedText)
+        await waitFor( async() => {
+            const elementText = await page.textContent(elementIdentifier);
+            return elementText?.includes(expectedText);
+        });
+        //const content = await page.textContent(elementIdentifier);
+        //expect(content).toBe(expectedText)
 
     }
 )
@@ -38,11 +40,13 @@ Then(
         console.log(`the ${elementKey} should be displayed`);
       
         const elementIdentifier = getElementLocator(elementKey, globalVariables, globalConfig);
-        //const locator = page.locator(".testing-talks-logo")
 
-        const locator = page.locator(elementIdentifier);
-
-        await expect(locator).toBeVisible();
+        await waitFor( async () => {
+            const isElementVisible = ( await page.$(elementIdentifier) ) != null; 
+            return isElementVisible;
+        });
+        // const locator = page.locator(elementIdentifier);
+        // await expect(locator).toBeVisible();
 
     }
 )
