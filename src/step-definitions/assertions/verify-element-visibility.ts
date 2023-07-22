@@ -10,13 +10,13 @@ Then(
     async function (this: ScenarioWorld, elementKey: ElementKey, expectedText: string) {
         const {
             screen: {page},
-            globalVariables,
+            //globalVariables,
             globalConfig,
         } = this;
 
         console.log(`the ${elementKey} should contains text ${expectedText}`);
 
-        const elementIdentifier = getElementLocator(elementKey, globalVariables, globalConfig);
+        const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
         await waitFor( async() => {
             const elementText = await page.textContent(elementIdentifier);
@@ -33,13 +33,13 @@ Then(
     async function (this: ScenarioWorld, elementKey: ElementKey){
         const {
             screen: {page},
-            globalVariables,
+            //globalVariables,
             globalConfig,
         } = this;
 
         console.log(`the ${elementKey} should be displayed`);
       
-        const elementIdentifier = getElementLocator(elementKey, globalVariables, globalConfig);
+        const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
         await waitFor( async () => {
             const isElementVisible = ( await page.$(elementIdentifier) ) != null; 

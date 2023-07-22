@@ -37,3 +37,25 @@ const pathMatchesPageId = (path: string, pageId: PageId, {pagesConfig}: GlobalCo
     return pageRegex.test(path);
 }
 
+export const getCurrentPageId = ( page: Page, globalConfig: GlobalConfig ) : PageId => {
+    const { pagesConfig } = globalConfig;   
+    console.log("getCurrentPageId - pagesConfig:::", pagesConfig)
+
+    const pagesConfigPageIds = Object.keys(pagesConfig);
+    console.log("getCurrentPageId - pagesConfigPageIds::: ", pagesConfigPageIds)
+
+    const { pathname: currentPagePath } = new URL(page.url());
+    console.log("getCurrentPageId - currentPagePath::: ", currentPagePath)
+
+    const currentPageId = pagesConfigPageIds.find( pageId => 
+        pathMatchesPageId(currentPagePath, pageId, globalConfig) );
+    console.log("getCurrentPageId - currentPageId::: ", currentPageId)
+    
+    if(!currentPageId){
+        throw Error(`Failed to get page name from current route ${currentPagePath}, \
+                            possible pages: ${JSON.stringify(pagesConfig)}`);
+    }
+        
+    return currentPageId;
+}
+ 

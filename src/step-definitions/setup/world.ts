@@ -18,13 +18,13 @@ export type Screen = {
 export class ScenarioWorld extends World {
     
     globalConfig: GlobalConfig;
-    globalVariables: GlobalVariables;
+   // globalVariables: GlobalVariables;
     screen!: Screen;
 
     constructor(options: IWorldOptions) {
         super(options);
         this.globalConfig = options.parameters as GlobalConfig;
-        this.globalVariables = { currentScreen: ""}
+        //this.globalVariables = { currentScreen: ""}
     }
 
     async init(contextOptions?: BrowserContextOptions): Promise<Screen> {

@@ -1,4 +1,4 @@
-export const waitFor = async <T>(
+export const waitFor = async <T> (
     aPradicateFn: () => T | Promise<T>,
     options?: {timeout?: number, wait?: number}
 ): Promise<T> => {
