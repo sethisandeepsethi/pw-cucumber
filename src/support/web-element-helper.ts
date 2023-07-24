@@ -1,5 +1,5 @@
 import { Page } from 'playwright';
-import { ElementKey, ElementLocator, GlobalConfig, GlobalVariables } from '../env/global'
+import { ElementKey, ElementLocator, GlobalConfig } from '../env/global'
 import { getCurrentPageId } from './navigation-behaviour';
 
 export const getElementLocator = (

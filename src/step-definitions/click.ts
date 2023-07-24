@@ -8,7 +8,10 @@ import { clickElement } from "../support/html-behaviour";
 Given(
     /^I click the "([^"]*)" (?:button|link|image|icon|element)$/,
     async function (this: ScenarioWorld, elementKey: ElementKey){
-        const { screen: { page }, globalConfig } = this;
+        const { 
+            screen: { page }, 
+            globalConfig 
+        } = this;
 
         console.log(`I click the ${elementKey} (?:button|link|image|icon|element)`);
 

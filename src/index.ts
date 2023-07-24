@@ -33,7 +33,7 @@ const common = `./src/features/**/*.feature \
                 --format progress-bar`;
 
 const smoke = `${common} --tags @smoke`;
-const regression = `${common} --tags @regression`;
+const reg = `${common} --tags @reg`;
 const wip = `${common} --tags @wip`;
 
-export {smoke, regression, wip}
+export {smoke, reg, wip}

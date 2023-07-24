@@ -1,4 +1,10 @@
 {
     "contacts header": "[data-id='contacts']",
-    "create" : "[data-id='add-button']"
+    "Create" : "[data-id='add-button']",
+    "Search Contacts": "[data-id='search']",
+    "Name label": "[data-id='name']",
+    "Gender label": "[data-id='gender']",
+    "Address label": "[data-id='address']",
+    "Edit button": "[data-id='edit-button']",
+    "Delete button": "[data-id='delete-button']"
 }
