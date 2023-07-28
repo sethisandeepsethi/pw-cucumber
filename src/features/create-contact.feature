@@ -16,8 +16,8 @@ Feature: As a user I expect to be able to create new contacts
 
         Then I am navigated to the "home" page
         And I fill in the "Search Contacts" input with "John Smith"
-        Then the "Name label" should contains text "John Smith"
-        Then the "Gender label" should contains text "Male"
+        Then the "Name label" should equals text "John Smith"
+        Then the "Gender label" should equals text "Male"
         Then the "Address label" should contains text "Fake Street"
         Then the "Address label" should contains text "Noida"
         And the "Edit button" should be displayed

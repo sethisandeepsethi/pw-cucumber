@@ -10,7 +10,6 @@ Then(
     async function (this: ScenarioWorld, elementKey: ElementKey, expectedText: string) {
         const {
             screen: {page},
-            //globalVariables,
             globalConfig,
         } = this;
 
@@ -22,9 +21,25 @@ Then(
             const elementText = await page.textContent(elementIdentifier);
             return elementText?.includes(expectedText);
         });
-        //const content = await page.textContent(elementIdentifier);
-        //expect(content).toBe(expectedText)
+    }
+)
 
+Then(
+    /^the "([^"]*)" should equals text "(.*)"$/,
+    async function (this: ScenarioWorld, elementKey: ElementKey, expectedText: string) {
+        const {
+            screen: {page},
+            globalConfig,
+        } = this;
+
+        console.log(`the ${elementKey} should contains text ${expectedText}`);
+
+        const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
+
+        await waitFor( async() => {
+            const elementText = await page.textContent(elementIdentifier);
+            return elementText === expectedText;
+        });
     }
 )
 
@@ -33,7 +48,6 @@ Then(
     async function (this: ScenarioWorld, elementKey: ElementKey){
         const {
             screen: {page},
-            //globalVariables,
             globalConfig,
         } = this;
 
