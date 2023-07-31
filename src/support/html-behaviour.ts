@@ -15,3 +15,7 @@ export const selectOption = async ( page: Page, elementIdentifier: ElementLocato
     await page.focus(elementIdentifier);
     await page.selectOption(elementIdentifier, dropdownOption);
 }
+
+export const checkElement = async ( page: Page, elementIdentifier: ElementLocator):Promise <void> => {
+    await page.check(elementIdentifier);
+}

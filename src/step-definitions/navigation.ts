@@ -10,7 +10,6 @@ Given(
         const {
             screen: {page},
             globalConfig,
-            //globalVariables,
         } = this;
         
         console.log(`I am on the ${pageId} page`);
@@ -26,8 +25,24 @@ Given(
 Then(
     /^I am navigated to the "([^"]*)" page$/,
     async function(this: ScenarioWorld, pageId: PageId) {
-        const { screen : { page }, globalConfig: GlobalConfig} = this;
+        const { 
+            screen : { page }, 
+            globalConfig
+        } = this;
         console.log(`I am navigated to the ${pageId} page`)
-        await waitFor(() => currentPathMatchesPageId(page, pageId, this.globalConfig));
+        //await waitFor(() => currentPathMatchesPageId(page, pageId, this.globalConfig));
+        await waitFor(() => currentPathMatchesPageId(page, pageId, globalConfig));
+    }
+)
+
+Then(
+    /^I paused the execution$/,
+    async function(this: ScenarioWorld) {
+        const {
+            screen: { page },
+            globalConfig
+        } = this;
+        console.log(`I paused the execution. NOT TO BE USED IN CI`);
+        await page.pause();
     }
 )

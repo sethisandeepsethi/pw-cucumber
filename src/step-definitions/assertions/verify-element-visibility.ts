@@ -44,23 +44,20 @@ Then(
 )
 
 Then(
-    /^the "([^"]*)" should be displayed$/,
-    async function (this: ScenarioWorld, elementKey: ElementKey){
+    /^the "([^"]*)" should( not)? be displayed$/,
+    async function (this: ScenarioWorld, elementKey: ElementKey, negate: boolean){
         const {
             screen: {page},
             globalConfig,
         } = this;
 
-        console.log(`the ${elementKey} should be displayed`);
+        console.log(`the ${elementKey} should ${negate ? 'not' : ''} be displayed`);
       
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
         await waitFor( async () => {
             const isElementVisible = ( await page.$(elementIdentifier) ) != null; 
-            return isElementVisible;
+            return isElementVisible === !negate ;
         });
-        // const locator = page.locator(elementIdentifier);
-        // await expect(locator).toBeVisible();
-
     }
 )

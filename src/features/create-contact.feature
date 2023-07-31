@@ -1,7 +1,7 @@
 Feature: As a user I expect to be able to create new contacts
 
-    @wip
     @reg
+    @smoke
     Scenario: As a user I expect to be able to create new contact
         Given I am on the "home" page
         And I click the "Create" button
