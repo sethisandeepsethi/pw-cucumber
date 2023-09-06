@@ -6,39 +6,39 @@ import { ScenarioWorld } from '../setup/world';
 import { waitFor } from '../../support/wait-for-behaviour';
 
 Then(
-    /^the "([^"]*)" should contains text "(.*)"$/,
-    async function (this: ScenarioWorld, elementKey: ElementKey, expectedText: string) {
+    /^the "([^"]*)" should( not)? contains text "(.*)"$/,
+    async function (this: ScenarioWorld, elementKey: ElementKey, negate: boolean, expectedText: string) {
         const {
             screen: {page},
             globalConfig,
         } = this;
 
-        console.log(`the ${elementKey} should contains text ${expectedText}`);
+        console.log(`the ${elementKey} should ${ negate ? 'not' : ''} contains text ${expectedText}`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
         await waitFor( async() => {
             const elementText = await page.textContent(elementIdentifier);
-            return elementText?.includes(expectedText);
+            return elementText?.includes(expectedText) === !negate;
         });
     }
 )
 
 Then(
-    /^the "([^"]*)" should equals text "(.*)"$/,
-    async function (this: ScenarioWorld, elementKey: ElementKey, expectedText: string) {
+    /^the "([^"]*)" should( not)? equals text "(.*)"$/,
+    async function (this: ScenarioWorld, elementKey: ElementKey, negate: boolean, expectedText: string) {
         const {
             screen: {page},
             globalConfig,
         } = this;
 
-        console.log(`the ${elementKey} should contains text ${expectedText}`);
+        console.log(`the ${elementKey} should ${negate ? 'not' : ''} contains text ${expectedText}`);
 
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
         await waitFor( async() => {
             const elementText = await page.textContent(elementIdentifier);
-            return elementText === expectedText;
+            return (elementText === expectedText) === !negate;
         });
     }
 )
