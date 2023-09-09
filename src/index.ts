@@ -30,7 +30,9 @@ const common = `./src/features/**/*.feature \
                 --require src/step-definitions/**/**/*.ts \
                 --world-parameters ${JSON.stringify(worldParameters)} \
                 -f json:./reports/report.json \
-                --format progress-bar`;
+                --format progress-bar \
+                --parallel ${env('PARALLEL')} \
+                --retry ${env('RETRY')}`;
 
 const smoke = `${common} --tags @smoke`;
 const reg = `${common} --tags @reg`;
