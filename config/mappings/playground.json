@@ -1,4 +1,6 @@
 {
     "female": "[value='female']",
-    "male": "[value='male']"
+    "male": "[value='male']",
+    "movies": "[id='movies-input']",
+    "the godfather": "//li[text()='The Godfather']"
 }

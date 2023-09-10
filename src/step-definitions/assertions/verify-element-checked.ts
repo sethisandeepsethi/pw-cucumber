@@ -20,8 +20,5 @@ Then(
                 return isElementChecked === !negate;
             }
         );
-        
-        
-        
     }
 )
