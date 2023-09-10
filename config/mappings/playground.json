@@ -2,5 +2,8 @@
     "female": "[value='female']",
     "male": "[value='male']",
     "movies": "[id='movies-input']",
-    "the godfather": "//li[text()='The Godfather']"
+    "the godfather": "//li[text()='The Godfather']",
+    "required input": "[id='outlined-required']",
+    "disabled input": "[id='outlined-disabled']",
+    "read-only input": "[id='outlined-read-only-input']"
 }

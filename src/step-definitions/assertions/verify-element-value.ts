@@ -24,3 +24,23 @@ Then(
         })
     }
 )
+
+Then(
+    /^the "([^"]*)" should( not)? equal the value "([^"]*)"$/,
+    async function(this: ScenarioWorld, elementKey: ElementKey, negate: boolean, expectedValue: string){
+        const {
+            screen: {page},
+            globalConfig
+        } = this;
+        console.log(`the ${elementKey} should ${negate ? 'not' : '' } contain the value ${expectedValue}`)
+
+        const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
+
+        await waitFor(async () => {
+            const result = await page.waitForSelector(elementIdentifier, {'state': 'visible'});
+            const actualValue = await getElementValue(page, elementIdentifier);
+            
+            return (actualValue === expectedValue) === !negate;
+        })
+    }
+)
