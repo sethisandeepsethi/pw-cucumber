@@ -39,8 +39,33 @@ Then(
         await waitFor(async () => {
             const result = await page.waitForSelector(elementIdentifier, {'state': 'visible'});
             const actualValue = await getElementValue(page, elementIdentifier);
-            
+            console.log(`The actual value is ${actualValue}`)
             return (actualValue === expectedValue) === !negate;
         })
     }
 )
+
+
+Then(
+    /^the "([^"]*)" should( not)? be enabled$/,
+    async function(this: ScenarioWorld, elementKey: ElementKey, negate: boolean){
+        const { 
+            screen: {page},
+            globalConfig
+        } = this;
+        console.log(`the ${elementKey} should ${negate ? 'not': ''} be enabled`)
+        const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
+
+        await waitFor( async () => {
+            const isElementEnabled = await page.isEnabled(elementIdentifier);
+            return isElementEnabled === !negate;
+        })
+        
+    })
+
+
+
+
+
+
+
