@@ -5,5 +5,11 @@
     "the godfather": "//li[text()='The Godfather']",
     "required input": "[id='outlined-required']",
     "disabled input": "[id='outlined-disabled']",
-    "read-only input": "[id='outlined-read-only-input']"
+    "read-only input": "[id='outlined-read-only-input']",
+    "green": "[data-id='green-radio-button']",
+    "grey": "[data-id='grey-radio-button']",
+    "blue": "[data-id='blue-radio-button']",
+    "purple": "[data-id='purple-radio-button']",
+    "red": "[data-id='red-radio-button']"
+
 }
